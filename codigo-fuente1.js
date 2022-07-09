@@ -1,8 +1,18 @@
-let totalDeLaCompra = 0;
+const botonCarrito = document.getElementById("button");
+const carrito1 = document.getElementById("carrito1");
+botonCarrito.onclick = mostrarCarritoActual;
+const carrito = [];
+
+// LOCAL STORAGE?
+
+/* const itemsJSON = JSON.stringify(carrito);
+localStorage.setItem ("items" , carrito); */
+
+
 
 class Motor {
     constructor (id, nombre, precio) {
-        this.id=id;
+        this.id = id;
         this.nombre = nombre;
         this.precio = precio;
     }
@@ -18,7 +28,6 @@ const motor3 = new Motor("AUTCOR060","Ch 800","23500");
 
 const productos = [motor1, motor2, motor3];
 
-const carrito = [];
 
 
 function agregarAlCarrito (id) {
@@ -33,13 +42,18 @@ function agregarAlCarrito (id) {
     }
 }
 
+function mostrarCarritoActual () {
 
-
-function mostrarCarritoActual (id) {
-
-    console.log(carrito); 
+    
+    const mostrarCarrito = carrito.map(function(carrito) {
+        return "\n" + carrito.nombre +" - $" + carrito.precio + "\n";
+    });
+    
+ 
+    carrito1.innerHTML = "Los productos de su carritos son los siguientes:" + mostrarCarrito;
 
 }
+
 
 
 function confirmarCompra() {
@@ -55,8 +69,8 @@ function confirmarCompra() {
 
 function mostrarProductos() {
     let menuMostrar = "Que producto quiere?\n";
-    productos.forEach(Motor=> {
-        menuMostrar += Motor.id +" -" + Motor.nombre +" - $" + Motor.precio+"\n"; 
+    productos.forEach(motor=> {
+        menuMostrar += motor.id +" -" + motor.nombre +" - $" + motor.precio +"\n"; 
     })
     let respuesta = prompt(menuMostrar);
     return respuesta;
@@ -68,7 +82,6 @@ function comprarProducto() {
 
         agregarAlCarrito(productoElegido);
 
-         mostrarCarritoActual();
     }
 }
 
