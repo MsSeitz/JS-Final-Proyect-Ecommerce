@@ -1,13 +1,10 @@
 const botonCarrito = document.getElementById("button");
 const carrito1 = document.getElementById("carrito1");
 botonCarrito.onclick = mostrarCarritoActual;
+
+const botonDelete = document.getElementById("delete");
+
 const carrito = [];
-
-// LOCAL STORAGE?
-
-/* const itemsJSON = JSON.stringify(carrito);
-localStorage.setItem ("items" , carrito); */
-
 
 
 class Motor {
@@ -86,3 +83,33 @@ function comprarProducto() {
 }
 
 comprarProducto();
+
+
+
+// lOCAL STORAGE ???
+
+
+localStorage.setItem ("items" , JSON.stringify(carrito));
+
+const localBack = JSON.parse(localStorage.getItem("items"))
+
+
+console.log (localBack);    
+
+
+if (!localBack == 0 ) {
+
+    carrito.push(localBack);
+
+}
+
+function eliminarCarrito () {
+
+    localStorage.clear();
+    carrito.length = 0;
+    carrito1.innerHTML = "Los productos de su carritos son los siguientes:";
+
+}
+
+botonDelete.onclick = eliminarCarrito;
+
